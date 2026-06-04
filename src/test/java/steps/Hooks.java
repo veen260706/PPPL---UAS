@@ -13,18 +13,20 @@ public class Hooks {
 
     @Before
     public void setUp() throws MalformedURLException {
-        // GANTI "app-release.apk" di bawah ini sesuai dengan nama file APK kamu yang ada di folder Downloads!
-        String apkName = "Tentang Dental.apk";
-        String apkPath = "/Users/gurveenderjeetkaur/Downloads/" + apkName;
-
+        String apkPath = "C:/Users/CYBORG/Downloads/Tentang Dental.apk";
         UiAutomator2Options options = new UiAutomator2Options()
                 .setPlatformName("Android")
                 .setAutomationName("UiAutomator2")
-                .setDeviceName("emulator-5554") // Sesuai dengan adb devices kamu tadi
+                .setDeviceName("emulator-5554")
                 .setApp(apkPath)
-                .setNoReset(false);
+                .setNoReset(false)
 
-        // Menghubungkan ke Appium Server lokal kamu
+                // --- SOLUSI PASTI: Menggunakan method khusus bertipe Duration ---
+                .setUiautomator2ServerLaunchTimeout(Duration.ofSeconds(90))
+                .setAdbExecTimeout(Duration.ofSeconds(60))
+                .setAndroidInstallTimeout(Duration.ofSeconds(90));
+
+        // Menghubungkan ke Appium Server lokal
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }

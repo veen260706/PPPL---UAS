@@ -5,9 +5,15 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "steps",
-        tags = "@Register", // <-- KUNCI DI SINI BIAR CUMA REGISTER YANG JALAN
-        plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+        glue = {"steps"},
+        tags = "@UploadRontgen",
+        monochrome = true,
+        plugin = {
+                "pretty",
+                "html:target/cucumber-report.html",
+                "json:target/cucumber.json",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+        }
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 }
